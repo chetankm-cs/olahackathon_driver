@@ -21,6 +21,7 @@ public class LauncherActivity extends Activity {
     private Booking mBooking;
 
     private ListView mListView;
+    private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,12 @@ public class LauncherActivity extends Activity {
         String data = getIntent().getStringExtra(Booking.TAG);
         mBooking = (Booking) POJOToJSON.fromJson(data, Booking.class);
         mListView = (ListView) findViewById(R.id.listView);
+        mTextView = (TextView) findViewById(R.id.textView);
         PassengerAdapter adapter = new PassengerAdapter(this);
         adapter.addAll(mBooking.getPassengers());
         mListView.setAdapter(adapter);
-
+        String text = String.format("Welcome Shyam,\\nYou need to drop off %d people", mBooking.getPassengers().size());
+        mTextView.setText(text);
     }
 
     public void mapButtonClicked(View v){

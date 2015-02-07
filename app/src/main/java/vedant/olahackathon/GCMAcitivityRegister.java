@@ -114,9 +114,6 @@ public class GCMAcitivityRegister {
 
             @Override
             protected void onPostExecute(String msg) {
-                Toast.makeText(context.getApplicationContext(),
-                        "Registered with GCM Server." + msg, Toast.LENGTH_LONG)
-                        .show();
 
                 if (TextUtils.isEmpty(regId)) {
                     Toast.makeText(context.getApplicationContext(), "RegId is empty!",
@@ -135,7 +132,7 @@ public class GCMAcitivityRegister {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(Config.REG_ID, regId);
         editor.putInt(APP_VERSION, appVersion);
-        editor.commit();
+        editor.apply();
     }
 //
 //    private void shareRegKey() {

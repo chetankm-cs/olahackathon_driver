@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome driver,\nYou need to drop off 3 people. It will take about 2hr 35min in current traffic"
+        android:text="Welcome Shyam,\nYou need to drop off 3 people"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
