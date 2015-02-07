@@ -39,4 +39,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.google.maps.android:android-maps-utils:0.3.2'
     compile 'com.google.maps:google-maps-services:0.1.5'
+    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
 }

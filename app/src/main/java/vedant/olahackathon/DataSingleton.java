@@ -2,6 +2,11 @@ package vedant.olahackathon;
 
 import com.google.maps.model.LatLng;
 
+import java.util.ArrayList;
+
+import vedant.olahackathon.Model.Booking;
+import vedant.olahackathon.Model.Passenger;
+
 /**
  * Created by vedant on 2/7/15.
  */
@@ -10,41 +15,36 @@ public class DataSingleton {
 
     private LatLng mOrigin;
     private LatLng[] mDestinations;
-    private Person[] mPeople;
+    private ArrayList<Passenger> mPeople;
 
-    public LatLng getOrigin() {
+
+    public void enterData(String object) {
+        Booking booking =(Booking) POJOToJSON.fromJson(object,Booking.class);
+
+    }
+
+
+    public LatLng getmOrigin() {
         return mOrigin;
     }
 
-    public LatLng[] getDestinations() {
+    public void setmOrigin(LatLng mOrigin) {
+        this.mOrigin = mOrigin;
+    }
+
+    public LatLng[] getmDestinations() {
         return mDestinations;
     }
 
-    public Person[] getPeople() {
+    public void setmDestinations(LatLng[] mDestinations) {
+        this.mDestinations = mDestinations;
+    }
+
+    public ArrayList<Passenger> getmPeople() {
         return mPeople;
     }
 
-    public void enterData(LatLng origin, LatLng[] destinations, Person[] people) {
-        mOrigin = origin;
-        mDestinations = destinations;
-        mPeople = people;
+    public void setmPeople(ArrayList<Passenger> mPeople) {
+        this.mPeople = mPeople;
     }
-
-    public static DataSingleton getInstance() {
-        return ourInstance;
-    }
-
-    private DataSingleton() {
-    }
-
-    public class Person {
-        public final String name;
-        public final String phone;
-
-        Person(String name, String phone) {
-            this.name = name;
-            this.phone = phone;
-        }
-    }
-
 }
