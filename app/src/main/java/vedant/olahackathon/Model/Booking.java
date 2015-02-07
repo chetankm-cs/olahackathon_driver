@@ -6,6 +6,9 @@ import java.util.ArrayList;
  * Created by vedant on 2/7/15.
  */
 public class Booking {
+
+    public final static String TAG = "Booking";
+
     public Integer getId() {
         return id;
     }

@@ -31,6 +31,11 @@ android {
             signingConfig signingConfigs.config
         }
     }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -41,4 +46,5 @@ dependencies {
     compile 'com.google.maps:google-maps-services:0.1.5'
     compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+    compile 'com.mcxiaoke.volley:library:1.0.8'
 }
