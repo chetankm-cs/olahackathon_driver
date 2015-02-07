@@ -1,12 +1,15 @@
 package vedant.olahackathon;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+
+import com.google.maps.model.LatLng;
 
 
-public class LauncherActivity extends ActionBarActivity {
+public class LauncherActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,26 +17,16 @@ public class LauncherActivity extends ActionBarActivity {
         setContentView(R.layout.activity_launcher);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_launcher, menu);
-        return true;
+    public void mapButtonClicked(View v) {
+        Intent mapIntent = new Intent(this, DirectionsActivity.class);
+        startActivity(mapIntent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void directionsButtonClicked(View v) {
+        LatLng destination = DataSingleton.getInstance().getDestinations()[0];
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + destination.lat + "," + destination.lng);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 }
