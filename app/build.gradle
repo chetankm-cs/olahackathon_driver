@@ -13,7 +13,7 @@ android {
     buildToolsVersion "21.1.1"
 
     defaultConfig {
-        applicationId "vedant.olahackathon"
+        applicationId "vedant.olahackathon.driver"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
@@ -38,4 +38,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.google.maps.android:android-maps-utils:0.3.2'
+    compile 'com.google.maps:google-maps-services:0.1.5'
 }
