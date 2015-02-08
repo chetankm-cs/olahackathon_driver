@@ -4,18 +4,18 @@ package vedant.olahackathon.Model;
  * Created by vedant on 2/7/15.
  */
 public class Passenger {
-    private Integer id;
+//    private Integer id;
     private String name;
     private String mobile;
     private Position geo;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;
