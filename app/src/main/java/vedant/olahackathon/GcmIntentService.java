@@ -17,6 +17,8 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.util.List;
 
+import vedant.olahackathon.Model.Booking;
+
 /**
  * Created by USER on 18-01-2015.
  */
@@ -43,40 +45,43 @@ public class GcmIntentService extends IntentService {
         if (!extras.isEmpty()) {
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR
                     .equals(messageType)) {
-                sendNotification("Send error: " + extras.toString());
+                sendNotification("Send error: " + extras.toString(), null);
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED
                     .equals(messageType)) {
                 sendNotification("Deleted messages on server: "
-                        + extras.toString());
+                        + extras.toString(), null);
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE
                     .equals(messageType)) {
 
 
-                sendNotification("Message Received from Google GCM Server: "
-                        + extras.get(Config.MESSAGE_KEY));
+                sendNotification("Ola! You have passengers", extras.getString(Config.MESSAGE_KEY));
                 Log.i(TAG, "Received:::::::: " + extras.toString());
             }
         }
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
-    private void sendNotification(String msg) {
+    private void sendNotification(String msg, String jsonObject) {
         Log.d(TAG, "Preparing to send notification...: " + msg);
         mNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent intent = new Intent(this, LauncherActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (jsonObject != null) {
+            intent.putExtra(Booking.TAG, jsonObject);
+            Log.d("fuck", String.valueOf(jsonObject));
+        }
         ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
         Log.d("topActivity", "CURRENT Activity ::" + taskInfo.get(0).topActivity.getClassName());
         ComponentName componentInfo = taskInfo.get(0).topActivity;
-//        if(componentInfo.getPackageName().equals(getPackageName()))
-//        {
-//            Log.e("My activity Running","yo lo ");
-//            return;
-//        };
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,intent , 0);
+        if(componentInfo.getPackageName().equals(getPackageName()))
+        {
+            startActivity(intent);
+            return;
+        }
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,intent , PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.icon_small)
                 .setAutoCancel(true)

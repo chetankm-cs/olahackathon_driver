@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +29,19 @@ public class LauncherActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         String data = getIntent().getStringExtra(Booking.TAG);
+        Log.d("fuck 2", data);
         mBooking = (Booking) POJOToJSON.fromJson(data, Booking.class);
+        if(mBooking==null) {
+//            String bookingData = "{\"error\":0,\"id\":890679,\"pickup\":{\"latitude\":13.204628,\"longitude\":77.707702},\"passengers\":[{\"id\":1,\"name\":\"Chetan\",\"mobile\":\"+91-1234567890\",\"address\":\"\",\"geo\":{\"latitude\":12.959823,\"longitude\":77.648615}},{\"id\":1,\"name\":\"Vedant\",\"mobile\":\"+91-1234567890\",\"address\":\"\",\"geo\":{\"latitude\":12.959279,\"longitude\":77.660974}},{\"id\":1,\"name\":\"Rajesh\",\"mobile\":\"+91-1234567890\",\"address\":\"\",\"geo\":{\"latitude\":12.9625,\"longitude\":77.628187}}]}";
+//            mBooking = (Booking) POJOToJSON.fromJson(bookingData, Booking.class);
+            throw new IllegalStateException();
+        }
         mListView = (ListView) findViewById(R.id.listView);
         mTextView = (TextView) findViewById(R.id.textView);
         PassengerAdapter adapter = new PassengerAdapter(this);
         adapter.addAll(mBooking.getPassengers());
         mListView.setAdapter(adapter);
-        String text = String.format("Welcome Shyam,\\nYou need to drop off %d people", mBooking.getPassengers().size());
+        String text = String.format("Welcome Shyam,\nYou need to drop off %d people", mBooking.getPassengers().size());
         mTextView.setText(text);
     }
 
